@@ -8,21 +8,22 @@ public class Movement : MonoBehaviour
     public float moveSpeed;
 
     Camera cam;
-   
+
     void Start()
     {
-        cam =Camera.main;
+        cam = Camera.main;
     }
 
-   
+
     void Update()
     {
-        transform.position +=Vector3.forward*moveSpeed* Time.deltaTime;
+        transform.position += Vector3.forward * moveSpeed * Time.deltaTime;
         if (Input.GetButton("Fire1"))
         {
             Move();
         }
-        
+
+
     }
 
     void Move()
@@ -32,14 +33,14 @@ public class Movement : MonoBehaviour
 
         Ray ray = cam.ScreenPointToRay(mousePos);
         RaycastHit hit;
-        if (Physics.Raycast(ray,out hit, Mathf.Infinity))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
             GameObject firstCube = ATMRush.instance.cubes[0];
             Vector3 hitVec = hit.point;
             hitVec.y = firstCube.transform.localPosition.y;
             hitVec.z = firstCube.transform.localPosition.z;
 
-            firstCube.transform.localPosition = Vector3.MoveTowards(firstCube.transform.localPosition,hitVec,Time.deltaTime*swipeSpeed);
+            firstCube.transform.localPosition = Vector3.MoveTowards(firstCube.transform.localPosition, hitVec, Time.deltaTime * swipeSpeed);
         }
     }
 }
